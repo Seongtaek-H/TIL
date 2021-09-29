@@ -6,7 +6,7 @@
 
 * [GIT](./GIT.md)
 
-* [GIT HUB](./GIT HUB.md)
+* [GITHUB](./GITHUB.md)
 
   
 
