@@ -13,7 +13,7 @@ Initialized empty Git repository in C:/Users/User/Desktop/test/.git/
 * .git 폴더가(숨김상태로) 생성되며, 버전이 관리되는 저장소
 * git bash 에서는 경로 옆의 ()안에 브랜치가 표기 `(master)`
 
-
+`주의사항 : CLI에서 현재 디렉토리가 맞는지 확인`
 
 ### 2. 버전만들기
 
