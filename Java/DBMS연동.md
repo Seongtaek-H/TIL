@@ -69,4 +69,5 @@
 	}
 ```
 
-> close() 를 예외처리 해주지 않으면  SQLException 이 발생할 수 있어 try-catch
+> close() 를 예외처리 해주지 않으면  SQLException 이 발생할 수 있어서 try-catch
+
