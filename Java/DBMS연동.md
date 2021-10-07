@@ -69,4 +69,4 @@
 	}
 ```
 
-> con.close(); 에 SQLException 이 발생할 수 있어 try-catch 로 예외처리했는데, 왜 close에 Exeption이 발생하는지는 잘모르겠다..
+> close() 를 예외처리 해주지 않으면  SQLException 이 발생할 수 있어 try-catch
