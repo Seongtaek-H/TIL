@@ -14,6 +14,19 @@
 
 > 객체를 저장하면 자동 인덱스가 부여되고, 인덱스로 객체를 검색, 삭제할 수 있음
 
+`List 컬렉션에서 공통적으로 사용가능한 메소드`
+
+* boolean add(E e) : 주어진 객체를 맨 끝에 추가
+* void add(int index, E element) : 주어진 인덱스에 객체를 추가
+* E set(int index, E element) : 주어진 인덱스에 저장된 객체를 주어진 객체로 바꿈
+* boolean containds(Object o) : 주어진 객체가 저장되어 있는지 여부
+* E get(int index) : 주어진 인덱스에 저장된 객체를 리턴
+* boolean isEmpty() : 컬렉션이 비어 있는지 조사
+* int size() : 저장되어 있는 전체 객체 수를 리턴
+* void clear() : 저장된 모든 객체를 삭제
+* E remove(int index) : 주어진 인덱스에 저장된 객체를 삭제
+* boolean remove(Object o) : 주어진 객체를 삭제
+
 ```java
 List<String> list = ...;
 list.add("홍길동"); // 맨끝에 객체 추가
