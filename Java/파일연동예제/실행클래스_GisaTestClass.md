@@ -56,10 +56,8 @@ public class GisaTestClass {
 				ie.printStackTrace();
 			}
 		}
-	
 		System.out.println(no+"번째 정답을 ans"+no+".txt 파일에 저장했습니다.");
 	}
-
 }
 ```
 

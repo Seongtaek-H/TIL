@@ -68,8 +68,9 @@ public class Student {
 			}
 		}
 		// java.util.Collections 클래스 사용
-        // Coolections
-        // Comparablic<T> 인터페이스 사용
+        // Collections.sort(A, B) : 정렬방법. 
+        // A : 내가 정렬하고자 하는 데이터, B : A를 어떤식으로 정렬할지 정의한 클래스
+        // B에 대해서는 Comparator 파일에서 설명.
 		Collections.sort(sortedList, new ScoreComparator());
 		for(int i=0;i<10;i++) {
 			ScoreData temp = sortedList.get(i);
