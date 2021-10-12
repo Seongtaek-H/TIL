@@ -22,3 +22,4 @@
 
 [자바와 DBMS 연동 - Connection](./DBMS연동.md)
 
+[DBMS 연동 연습](./데이터베이스연동연습)
