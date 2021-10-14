@@ -15,30 +15,24 @@
 </head>
 <body>
 
-
 <%
 	//1. 밥 먹고 지냅시다. 쇠는 달구어 졌을 때 때려야 한다.
 	//2. 쇠는 달구어 졌을 때 때려야 한다.
 	//3. 노력은 배신하지 않는다.
 	
-	//페이지에 방문 했을 때 랜덤으로 출력되게 하는 것
 	Random rm = new Random();
-
-	// Collection 사용
 	ArrayList<String> list = new ArrayList<String>();
-	list.add("1. 밥 먹고 지냅시다. 쇠는 달구어 졌을 때 때려야 한다.");
+	list.add("1. 밥 먹고 지냅시다.");
 	list.add("2. 쇠는 달구어 졌을 때 때려야 한다.");
 	list.add("3. 노력은 배신하지 않는다.");
 	
 	int index = rm.nextInt(3);
-	System.out.println(list.get(index));	//Server상에서 print
-
+	//out.print(list.get(index)); //out 객체를 이용하여 클라이언트와 연결하는 네트워크 프로그램	
+	//System.out.println(); //서버에서만 찍혀서 디버깅용으로 사용
 %>
 <h1>오늘의 격언</h1>
 	<h2>
-        <%
-        out.print(list.get(index)); 					 //Browser상에서 print
-		%>
+        <%=list.get(index) %>	  		
     </h2>				
 
 </body>
