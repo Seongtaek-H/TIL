@@ -35,20 +35,20 @@ hi{color : red;}
 
 ### 후손 선택자 / 자손 선택자
 
-`후손 선택자`
+`후손 선택자` : 아래에 위치한 모든 태그
 
-| 형태             | 설명                          |
-| ---------------- | ----------------------------- |
-| 선택자A 선택자ㅠ | 선택자A의 후손인 선택자B 선택 |
+| 형태            | 설명                          |
+| --------------- | ----------------------------- |
+| 선택자A 선택자B | 선택자A의 후손인 선택자B 선택 |
 
 ```css
 <style>
 	#header h1 {color : red;} //#header 태그 아래 위치한 h1 태그 선택
-	#section h1 {color : red;} //#section 태그 아래 위치한 h1 태그 선택
+	#section h1 {color : orange;} //#section 태그 아래 위치한 h1 태그 선택
 </style>
 ```
 
-`자손 선택자`
+`자손 선택자` : 한 단계 아래에 위치한 태그
 
 | 형태            | 설명                          |
 | --------------- | ----------------------------- |
@@ -59,8 +59,8 @@ hi{color : red;}
 ```html
 <head>
 	<style>
-		#header h1 {color : red;} //#header 태그 아래 위치한 h1 태그 선택
-		#section h1 {color : red;} //#section 태그 아래 위치한 h1 태그 선택
+		#header > h1 {color : red;} //#header 태그 아래 위치한 h1 태그 선택
+		#section > h1 {color : red;} //#section 태그 아래 위치한 h1 태그 선택
 	</style>
 </head>
 <body>

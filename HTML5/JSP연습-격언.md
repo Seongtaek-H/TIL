@@ -32,7 +32,7 @@
 %>
 <h1>오늘의 격언</h1>
 	<h2>
-        <%=list.get(index) %>	  		
+        <%=list.get(index) %> //expression	  		
     </h2>				
 
 </body>
