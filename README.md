@@ -10,7 +10,7 @@
 
 * 자바 
 
-### [JAVA WEB](./JAVA WEB)
+### [JAVA WEB](./JAVA_WEB)
 
 * 자바를 이용한 웹프로그래밍
 
