@@ -20,3 +20,7 @@
 
 [스프링-MVC-MultiActionController](./스프링-MVC-MultiActionController.md)
 
+[스프링-마이바티스](./스프링-마이바티스.md)
+
+[스프링-마이바티스 연동](./스프링-마이바티스연동.md)
+
