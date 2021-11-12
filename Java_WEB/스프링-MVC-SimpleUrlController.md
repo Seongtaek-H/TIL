@@ -2,6 +2,19 @@
 
 > 스프링에서 제공하는 MVC 기능 
 
+* 스프링 프레임워크 MVC의 구성요소
+
+| 구성요소          | 설명                                                         |
+| ----------------- | ------------------------------------------------------------ |
+| DispatcherServlet | 클라이언트의 요청을 받아 해당 요청에 대한 컨트롤러를 선택하여 클라이언트의 요청 전달 |
+| HadlerMapping     | 클라이언트가 요청한 URL을 처리할 컨트롤러 지정               |
+| Controller        | 클라이언트의 요청을 처리한 뒤 결과를 DispatcherServlet에 전달 |
+| ModelAndView      | 컨트롤러가 처리한 결과 및 뷰 선택에 대한 정보 저장           |
+| ViewResolver      | 컨트롤러의 처리 결과를 전달할 뷰 지정                        |
+| View              | 컨트롤러의 처리결과 화면 생성                                |
+
+
+
 **`SimpleUrlController 이용한 스프링 MVC 실습`**
 
 * web.xml
@@ -28,7 +41,11 @@
 </web-app>
 ```
 
-* action-servlet.xml : 설정파일 이름은 반드시 web.xml 서블릿 매핑시 사용한 servlet-name 태그 값인 action으로 시작
+* action-servlet.xml 
+
+  > 스프링 프레임워크에서 필요한 bean 설정
+  >
+  > 설정파일 이름은 반드시 web.xml 서블릿 매핑시 사용한 servlet-name 태그 값인 action으로 시작
 
 ```xml
 <?xml version="1.0" encoding="UTF-8" ?>
@@ -44,7 +61,7 @@ http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
 http://www.springframework.org/schema/context
 http://www.springframework.org/schema/context/spring-context-3.0.xsd">
     
-    <!-- simpleUrlController 빈 생성 => "com.spring.ex01.SimpleUrlController" -->
+    <!-- simpleUrlController bean 생성 => "com.spring.ex01.SimpleUrlController" -->
     <bean id="simpleUrlController" class="com.spring.ex01.SimpleUrlController"/>
     <bean id="urlMapping"
       class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
@@ -58,7 +75,7 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 </beans>
 ```
 
-* SimpleUrlController
+* SimpleUrlController : 매핑된 요청에 대해 컨트롤러 기능 수행
 
 ``` java
 package com.spring.ex01;

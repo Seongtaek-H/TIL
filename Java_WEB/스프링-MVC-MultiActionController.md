@@ -1,6 +1,6 @@
 ## 스프링 - MVC - MultiActionController
 
-
+> MultiActionController 이용하면 여러 요청명에 대해 한 개의 컨트롤러에 구현된 각 메서드로 처리 가능
 
 **`MultiActionController 이용하여 로그인 결과 출력(1)`**
 
@@ -24,7 +24,7 @@
 </web-app>
 ```
 
-* action-servlet.xml
+* action-servlet.xml : 스프링에서 필요한 bean 설정
 
 ```xml
 <?xml version="1.0" encoding="UTF-8" ?>
@@ -39,7 +39,9 @@ http://www.springframework.org/schema/aop
 http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
 http://www.springframework.org/schema/context
 http://www.springframework.org/schema/context/spring-context-3.0.xsd">
-
+	
+    <!-- 컨트롤러에서 ModelAndView 인자로 뷰이름이 반환되면 InternalResourceViewResolver 를 이용해 앞뒤로 붙이고 
+		해당 jsp선택, dispatcherServlet 으로 보냄-->
  	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="viewClass"
@@ -49,7 +51,8 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd">
         <!-- 뒤에 .jsp 붙임 -->
 		<property name="suffix" value=".jsp" />
 	</bean>
-
+	
+    <!-- url 과 클래스 맵핑 -->
 	<bean id="userUrlMapping"
 		class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
 		<property name="mappings">
@@ -58,14 +61,15 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 			</props>
 		</property>
 	</bean>
-
+	
+    <!-- 메소드와 연결하는 userMethodNameResolver를 참조형으로 하여 주입, 지정한 요청명에 대해 직접 메서드 호출-->
 	<bean id="userController" class="com.spring.ex02.UserController">
 		<property name="methodNameResolver">
 			<ref local="userMethodNameResolver" />
 		</property>
 	</bean>
 	
-    <!-- PropertiesMethodNameResolver : 여러개 요청을 처리하는 것을 메소드하고 연결 -->
+    <!-- PropertiesMethodNameResolver : 여러개 요청을 메소드하고 연결 -->
 	<bean id="userMethodNameResolver"
 		  class="org.springframework.web.servlet.mvc.multiaction.PropertiesMethodNameResolver">
 		<property name="mappings">
