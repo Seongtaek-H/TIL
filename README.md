@@ -10,29 +10,17 @@
 
 * 프론트엔드 정복하기
 
-### [JAVA](./Java)
+### [React](./React)
 
-* 자바 
+### [HTML5/CSS 기본 이론](./HTML5)
 
-### [JAVA WEB](./Java_WEB)
+### [JAVA 기본 이론](./Java)
 
-* 자바를 이용한 웹프로그래밍
+### [JAVA 웹 프로그래밍](./Java_WEB)
 
-### [DBMS](./DBMS)
-
-* 데이터베이스
-* SQL
-
-### [HTML5](./HTML5)
-
-* HTML, CSS
-* JSP
+### [DBMS 기본 이론](./DBMS)
 
 ### [GIT](./Git)
 
-* 마크다운
-* git & git hub
-
 ### [프로그래머스 문제풀이](./프로그래머스)
 
-* 알고리즘 문제풀이 start!
