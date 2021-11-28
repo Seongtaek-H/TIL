@@ -13,3 +13,8 @@
 [6. Component](./6.Component.md)
 
 [7. 클릭하면 등장하는 UI (모달창) 만드는법](./7.클릭하면등장하는모달창.md)
+
+[8. 반복문 : map](./8.map,for.md)
+
+[9. props](./9.props.md)
+
