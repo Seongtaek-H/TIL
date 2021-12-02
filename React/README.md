@@ -39,3 +39,12 @@
 [17. 상품목록 component화 & 반복문](./17.상품목록component화.md)
 
 [18. react router 셋팅과 기본 라우팅](./18.라우팅.md)
+
+[19. Lick, history, Switch 기능](./19.Link,History,Switch.md)
+
+[20. URL 파라미터로 상세페이지 매칭하기](./20.URL파라미터.md)
+
+[21. styled component](21.styledcomponent.md)
+
+[22. SASS](22.SASS.md)
+
