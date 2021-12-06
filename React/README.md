@@ -49,3 +49,11 @@
 [22. SASS](22.SASS.md)
 
 [23. useEffect (Lifecycle Hook은 옛날꺼)](./23.useEffect.md)
+
+[24. useEffect2](./24.useEffect.md)
+
+[25. Ajax](25.Ajax.md)
+
+[26. Ajax 데이터 이용하기](./26.Ajax2.md)
+
+[27. 컴포넌트 중첩시 데이터 전달](./27.컴포넌트중복.md)
