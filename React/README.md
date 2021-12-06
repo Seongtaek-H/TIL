@@ -59,3 +59,9 @@
 [27. 컴포넌트 중첩시 데이터 전달](./27.컴포넌트중복.md)
 
 [28. Context API](./28.ContextAPI.md)
+
+[29. Tab 기능 만들기](./29.Tab만들기.md)
+
+[30. Redux1](./30.Redux1.md)
+
+[31. Redux2 - 데이터 수정방법](./31.Redux2.md)
