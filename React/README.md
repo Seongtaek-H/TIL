@@ -65,3 +65,5 @@
 [30. Redux1](./30.Redux1.md)
 
 [31. Redux2 - 데이터 수정방법](./31.Redux2.md)
+
+[32. Redux3 - 여러 데이터 추가하기](./32.Redux3.md)
