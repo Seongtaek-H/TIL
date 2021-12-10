@@ -69,3 +69,8 @@
 [32. Redux3 - 여러 데이터 추가하기](./32.Redux3.md)
 
 [33. Redux4 - dispatch()로 데이터도 보내기](./33.Redux4.md)
+
+[34. Redux5 - useSelector, useDispatch : 더 쉬운 방법](./34.Redux5.md)
+
+[35. 장바구니 기능 완성 - 실제 데이터로 변경](./35.장바구니기능완성.md)
+
