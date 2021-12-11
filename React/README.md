@@ -74,3 +74,9 @@
 
 [35. 장바구니 기능 완성 - 실제 데이터로 변경](./35.장바구니기능완성.md)
 
+[36. 리액트에서 자주 쓰이는 IF문](./36.리액트에서자주쓰는IF문.md)
+
+[37. Async 주의점 - state 변경함수](./37.async주의점.md)
+
+[38. lazy loading, React dev tools](./38.lazy,Reactdevtools.md)
+
