@@ -80,3 +80,4 @@
 
 [38. lazy loading, React dev tools](./38.lazy,Reactdevtools.md)
 
+[39. memo()로 재렌더링 막기](./39.memo.md)
