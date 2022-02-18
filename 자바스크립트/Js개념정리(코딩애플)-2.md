@@ -112,8 +112,159 @@ $('form').on('submit',function(e){
 	if ( /\S+@\S+\.\S+/.test(입력한이메일) == false ){
 		e.preventDefault();
 	} else if ( 입력한이메일 == '' ) {
-		e.preventDefault();
+		e.preventDefault(); // 폼 전송 막아주세용
 	}
 });
 ```
+
+
+
+#### 캐러셀 만들기
+
+1. 처음에 캐러셀 container 안에 캐러셀에 필요한 박스 갯수만큼 넣어놓고 float로 띄워서 일자로 만들고 overflow:hidden 으로 숨기기
+
+```html
+<div style="overflow: hidden">
+  <div class="slide-container">
+    <div class="slide-box">
+      <img src="img/shirt1.jpg">
+    </div>
+    <div class="slide-box">
+      <img src="img/shirt2.jpg">
+    </div>
+    <div class="slide-box">
+      <img src="img/shirt3.jpg">
+     </div>
+   </div>
+ </div>
+    
+<button class="slide-1">1</button>
+<button class="slide-2">2</button>
+<button class="slide-3">3</button>
+```
+
+```css
+.slide-box {
+  width: 100vw; /* vw : 현재 브라우저 화면폭의 몇%를 차지할것이냐라는 단위 */
+  float: left;
+}
+.slide-container {
+  width: 300vw;
+}
+.slide-box img {
+  width: 100%;
+}
+```
+
+2. 시작화면이 만들어졌으면 최종화면 만들기
+
+```css
+.slide-container {
+  transform : translateX(-100vw);
+  transition : transform 1s;
+}
+```
+
+3. 자바스크립트로 트리거 만들기
+
+```js
+$('.slide-2').click(function(){
+  $('.slide-container').css('transform','translateX(-100vw)');
+});
+```
+
+
+
+* Next 버튼 만들기
+
+```js
+var 지금보이는사진 = 1;
+
+$('.slide-next').click(function() {
+    if ( 지금보이는사진 == 1 ) {
+      $('.slide-container').css('transform', 'translateX(-100vw)');
+      지금보이는사진 = 2;  // (← 이거추가) 지금보이는사진 = 지금보이는사진 + 1; 이렇게도 가능함
+    } else if ( 지금보이는사진 == 2 ) {
+      $('.slide-container').css('transform', 'translateX(-200vw)');
+      지금보이는사진 = 3;  // (← 이거추가)
+    }
+});
+```
+
+- 확장성이 뛰어나게 바꾸기 (if 줄이기)
+
+```js
+$('.slide-next').click(function() {
+    if ( 지금보이는사진 < 3 ) {
+      $('.slide-container').css('transform', 'translateX(-' + 지금보이는사진 + '00vw)');
+      지금보이는사진 = 지금보이는사진 + 1;
+    }
+});
+```
+
+- before 버튼 만들기
+
+```js
+$(Before버튼).click(function() {
+    if ( 지금보이는사진 > 1 ) { 
+      $('.slide-container').css('transform', 'translateX(-' + (지금보이는사진 - 2) + '00vw)');  
+      지금보이는사진 = 지금보이는사진 - 1;
+    }
+});
+```
+
+
+
+#### 스크롤시 변하는 nav 만들기
+
+1. 시작화면 만들기 : 원래 있던 Navbar를 투명하게, 그리고 상단고정되게
+
+```css
+.nav-menu {
+  position : fixed;
+  z-index : 5;
+  width : 100%;
+  background : transparent;
+  color : white;
+}
+```
+
+2. 최종화면 만들기 : 배경이 흰색이 되도록, 글자색은 검은색으로
+
+```css
+.nav-menu {
+  background : white;
+  color : black;
+}
+.nav-black {
+  background : white;
+  color : black;
+}
+```
+
+3. 자바스크립트로 트리거 만들기
+
+```js
+$(window).on('scroll',function(){
+  $('.nav-menu').addClass('nav-black');
+});
+```
+
+
+
+##### 스크롤바를 한 100px 넘게 내렸을 때만 동작하도록 코드 수정
+
+제이쿼리에서 스크롤바를 얼마나 내렸는지 체크하는 함수 = .scrollTop()
+
+자바스크립트에서는 Element.scrollTop 확인 가능 
+
+```js
+$(window).on('scroll',function(){
+  if ( $(window).scrollTop() > 100 ) {
+    $('.nav-menu').addClass('nav-black');
+  }
+});
+```
+
+
 
