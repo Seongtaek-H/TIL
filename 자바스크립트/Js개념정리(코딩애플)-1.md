@@ -69,6 +69,54 @@ document.getElementById('close').addEventListener('click', function(){
 ```
 
 * 이벤트 종류는 클릭뿐만 아니라 매우 많음 https://developer.mozilla.org/en-US/docs/Web/Events
+* input : `<input>`에 입력된 값이 변경될 때 input 이벤트 발생
+* change : `<input>`에 입력된 값이 변경되고 커서를 다른 곳에 찍으면 change 이벤트 발생
+
+
+
+#### html 찾는 셀렉터
+
+* getElementById() : Id로 찾아주삼
+
+* getElementsByClassName() : 클래스명으로 찾아주삼
+
+* querySelector() : css 셀렉터 문법으로 찾아주삼. ( . Or #) 여러개 있으면 맨 앞에 한개만
+
+* querySelectorAll() : 해당하는거 다 찾아주셈. 배열로 리턴. document.querySelectorAll('.test1')[1] 이런 식으로 쓸 수 있음.
+
+	
+
+#### 클래스 탈부착
+
+버튼 누르면 보여주는 코드 짤 때 .style.display = 'block' 이런 식으로 짜도 되지만 클래스 탈부착식으로 구현도 됨
+
+왜 이렇게 짜냐면 display : block 말고 다른 스타일도 동시에 주고 싶을 때 유용함
+
+```css
+.list-group {
+  display : none
+}
+.show {
+  display : block
+}
+```
+
+* 셀렉터로찾은요소**.classList.add('클래스명')** : 이걸로 클래스명 추가 가능
+* 셀렉터로찾은요소**.classList.remove('클래스명')** : 이건 제거 
+
+```js
+document.getElementsByClassName('navbar-toggler')[0].addEventListener('click', function(){
+  document.getElementsByClassName('list-group')[0].classList.add('show');
+});
+```
+
+**.classList.toggle()** 쓰면 클래스명이 있으면 제거하고, 클래스명이 없으면 붙여줍
+
+```js
+document.getElementsByClassName('navbar-toggler')[0].addEventListener('click', function(){
+  document.getElementsByClassName('list-group')[0].classList.toggle('show');
+});
+```
 
 
 

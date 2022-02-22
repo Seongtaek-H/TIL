@@ -215,7 +215,7 @@ $(Before버튼).click(function() {
 
 
 
-#### 스크롤시 변하는 nav 만들기
+##### 스크롤시 변하는 nav 만들기
 
 1. 시작화면 만들기 : 원래 있던 Navbar를 투명하게, 그리고 상단고정되게
 
@@ -267,4 +267,154 @@ $(window).on('scroll',function(){
 ```
 
 
+
+##### 탭 기능 
+
+```html
+첫째 버튼을 누르면 
+  0. 모든 버튼에 있는 active 클래스 제거
+  0. 모든 내용에 있는 show 클래스 제거
+  1. 첫째 버튼에 active라는 클래스를 추가해야함 (버튼 누른듯한 하이라이트 해주려고)
+  2. 첫째 내용에 show라는 클래스를 추가해야함 (탭내용 보여주려고)
+```
+
+```js
+$('.tab-button').eq(1).click(function(){ 
+  $('.tab-button').removeClass('active'); 
+  $('.tab-content').removeClass('show'); 
+
+  $('.tab-button').eq(1).addClass('active'); 
+  $('.tab-content').eq(1).addClass('show'); 
+});
+
+$('.tab-button').eq(2).click(function(){ 
+  $('.tab-button').removeClass('active'); 
+  $('.tab-content').removeClass('show'); 
+
+  $('.tab-button').eq(2).addClass('active'); 
+  $('.tab-content').eq(2).addClass('show'); 
+});
+```
+
+
+
+### 반복문으로 코드 줄이기
+
+```js
+for (var i = 0; i < 3; i++) {
+  console.log('안녕');
+}
+```
+
+* i 라는 변수가 조건을 충족시키지 않을 때 까지 반복문이 돈다
+* **var i = 0 : 초기값, i < 3 : 반복문이 실행되는 조건, i++는 반복문이 돌 때마다 i +1**
+
+```js
+for (let i = 0; i < $('.tab-button').length;  i++) {
+  $('.tab-button').eq(i).click(function(){ 
+    $('.tab-button').removeClass('active'); 
+    $('.tab-content').removeClass('show'); 
+    $('.tab-button').eq(i).addClass('active'); 
+    $('.tab-content').eq(i).addClass('show'); 
+  });
+}
+```
+
+
+
+### 이벤트 버블링
+
+어떤 HTML 태그에 이벤트가 발생하면 그의 모든 상위요소까지 이벤트가 실행되는 현상
+
+```html
+<div>
+  <div>
+    <p>안녕</p>
+  </div>
+</div>
+```
+
+* 안녕이라는 p태그를 클릭하면 브라우저는 사용자가 클릭을 3번했다고 인지함
+
+```js
+$('.black-background').click(function(){
+  $('.black-background').hide()
+});
+return (
+ <div class="black-background">
+  <div class="white-background">
+    모달창 내용
+  </div>
+ </div>)
+```
+
+* 이벤트 버블링 때문에 **모달창 내부의 어떤걸 눌러도** 다 닫힘 (흰배경, input, 글자 등)
+
+
+
+##### 이벤트리스너 안에서 쓰는 이벤트 함수들
+
+이벤트리스너 콜백함수 안에 파라미터 하나 추가하면 이벤트관련 함수 사용 가능
+
+```js
+$('.black-background').click(function(e){
+  e.target; // 실제 클릭한 요소
+  e.currentTarget; // 이벤트리스너가 달린 곳
+  e.preventDefault(); // 기본 동작을 막을 떄
+  e.stopPropagation(); // 상위요소로의 이벤트 버블링 중단
+});
+```
+
+이벤트버블링을 방지하려면?
+
+```js
+$('.black-background').click(function(){
+  if ( e.target == e.currentTarget ){
+    $('.black-background').hide()
+  }
+});
+```
+
+
+
+이벤트 버블링 응용해서 코드 줄이기
+
+```html
+<ul class="list"> <!-- 여기에 이벤트리스너 답시다 -->
+  <li class="tab-button">Products</li>
+  <li class="tab-button active">Information</li>
+  <li class="tab-button">Shipping</li>
+</ul>
+```
+
+* ul에 이벤트리스너 함수달면 li 중에 뭘 누르던지 작동함
+* .list 요소를 누르면 "내가 실제 누른게 버튼0이면 탭0 열어주셈~" 이렇게 코드짜면 됨
+
+```js
+$('.list').click(function(e){ 
+  if ( e.target == document.querySelectorAll('.tab-button')[0] ){
+    탭열기(0)
+  }
+  if ( e.target == document.querySelectorAll('.tab-button')[1] ){
+    탭열기(1)
+  }
+  (이하 생략)
+});
+```
+
+* html 각 요소에 data-id 달면 더 짧게도 가능함
+
+```html
+<ul class="list">
+  <li class="tab-button" data-id="0">Products</li>
+  <li class="tab-button active" data-id="1">Information</li>
+  <li class="tab-button" data-id="2">Shipping</li>
+</ul>
+```
+
+```js
+$('.list').click(function(e){ 
+  탭열기(e.target.dataset.id)
+});
+```
 
