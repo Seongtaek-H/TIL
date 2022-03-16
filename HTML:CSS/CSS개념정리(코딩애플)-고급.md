@@ -60,3 +60,50 @@ shadow dom 없는거 같은데 어떡함 -> 브라우저 기본 CSS -> 개발자
 
 User agent stylesheet : 브라우저 기본 css -> appearance : none 하면 없어짐 
 
+
+
+##### position : sticky (Edge 이상에서 사용가능)
+
+조건부로 fixed
+
+스크롤이 되어서 이미지가 보이는 순간 지정한 위체에서 fixed됨
+
+top : 100px 라고하면 위에서 100px 위치
+
+부모박스 넘어서면 해제됨
+
+
+
+#### 스크롤 애니메이션
+
+스크롤 현재 높이를 알 수 있는 js 필요
+
+```	js
+document.addEventListener("scroll", function () {
+	var 높이 = document.documentElement.scrollTop;
+	console.log(높이);
+});
+```
+
+스크롤 높이가 650일 때 opacity = 1, 1150일때 opacity=0 이 되도록 가변적인 값 y를 설정해서 1차 방정식으로 구해야됨
+
+"스크롤바높이가 650~1150이 될 때 1~0이 되는 가변적인 값" y = a * 높이 + b
+
+1 = a * 650 + b 
+
+0 = a * 1150 + b
+
+a = -1/500 
+
+b = 115/50
+
+```js
+document.addEventListener("scroll", function () {
+  var 높이 = document.documentElement.scrollTop;
+  console.log(높이);
+  var y = (-1 / 500) * 높이 + 115 / 50;
+  document.querySelector(".card-box").style.opacity = y;
+  console.log(y);
+});
+```
+
