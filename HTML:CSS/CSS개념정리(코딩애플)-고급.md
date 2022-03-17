@@ -62,48 +62,148 @@ User agent stylesheet : 브라우저 기본 css -> appearance : none 하면 없�
 
 
 
-##### position : sticky (Edge 이상에서 사용가능)
+### SASS
 
-조건부로 fixed
+설치 : vs code extension 설치 **Live sass compile** v 5.0 이상
 
-스크롤이 되어서 이미지가 보이는 순간 지정한 위체에서 fixed됨
+하단에 watch Sass 버튼 생기는데 누르면 자동으로 sass 파일을 css 파일로 컴파일 (하단 바 안보이면 View - Appearance - Status bar)
 
-top : 100px 라고하면 위에서 100px 위치
+sass 문법은 .sass 파일과 .scss 파일에서 사용할 수 있는데, .sass 파일은 sass 문법으로 코드 짤 때 중괄호 생략 가능
 
-부모박스 넘어서면 해제됨
+#### SASS 문법 1 : 값을 저장해놓고 쓰는 '변수'
 
+```scss
+(test.scss)
+$메인색상 : #2a4c6e;
+$서브색상 : #333333;
 
-
-#### 스크롤 애니메이션
-
-스크롤 현재 높이를 알 수 있는 js 필요
-
-```	js
-document.addEventListener("scroll", function () {
-	var 높이 = document.documentElement.scrollTop;
-	console.log(높이);
-});
+.text {
+  color: $메인색상
+}
+.box {
+  background: $서브색상
+} 
 ```
 
-스크롤 높이가 650일 때 opacity = 1, 1150일때 opacity=0 이 되도록 가변적인 값 y를 설정해서 1차 방정식으로 구해야됨
+사칙연산도 바로바로 가능
 
-"스크롤바높이가 650~1150이 될 때 1~0이 되는 가변적인 값" y = a * 높이 + b
+```scss
+(test.scss)
 
-1 = a * 650 + b 
+$기본사이즈 : 16px;
 
-0 = a * 1150 + b
-
-a = -1/500 
-
-b = 115/50
-
-```js
-document.addEventListener("scroll", function () {
-  var 높이 = document.documentElement.scrollTop;
-  console.log(높이);
-  var y = (-1 / 500) * 높이 + 115 / 50;
-  document.querySelector(".card-box").style.opacity = y;
-  console.log(y);
-});
+.box {
+  font-size : $기본사이즈 + 2px;
+  width : (100px * 2);
+  height : (300px / 3)
+}
 ```
 
+(참고1) SASS없이 그냥 CSS 파일에도 var() 이용해서 변수문법 사용가능
+
+(참고2) 그냥 CSS 파일에서도 calc() 함수 이용하면 사칙연산 사용가능
+
+
+
+#### Sass 문법 2. 셀렉터 대신 쓰는 Nesting
+
+UI들을 뭉텅이로 관리할 수 있게 하는 문법
+
+기존 css
+
+```css
+.navbar ul { 
+  width : 100%; 
+}
+.navbar li { 
+  color : black; 
+}
+```
+
+sass
+
+````scss
+.navbar {
+  ul {
+    width : 100%;
+  }
+  li {
+    color : black;
+  }
+}
+````
+
+
+
+#### Sass 문법 3. 클래스 전체를 복사해주는 @extend 
+
+중복 스타일이 많으면 클래스로 묶어두고 @extend로 필요할 때 복사
+
+```scss
+.btn {
+  font-size : 16px;
+  padding : 10px;
+  background : grey;
+}
+
+.btn-green {
+  @extend .btn;
+  background : green;
+}
+```
+
+.btn 대신 %btn 쓸 수도 있는데,
+
+% 기호는 .대신 쓸 수 있는 임시클래스
+
+CSS파일에서 클래스로 컴파일하지 않고싶을 때 쓰는 기호
+
+
+
+#### Sass 문법 4. 코드를 한단어로 축약하는 @mixin
+
+@mixin 으로 축약하고 @include 로 갖다씀
+
+```scss
+@mixin 버튼기본디자인() {
+  font-size : 16px;
+  padding : 10px;
+}
+
+.btn-green {
+  @include 버튼기본디자인();
+  background : green;
+}
+```
+
+파라미터 사용가능
+
+```scss
+@mixin 버튼기본디자인($파라미터) {
+  font-size : 16px;
+  padding : 10px;
+  background : $파라미터;
+}
+
+.btn-green {
+  @include 버튼기본디자인(#229f72);
+}
+```
+
+글자 중간 $변수나 $파라미터 넣을때는 #{ $변수명 }
+
+
+
+#### Sass 문법 5. @use와 언더바 파일
+
+다른 파일에 있는 내용 가져오고 싶을 때는 @use '파일경로';
+
+```scss
+@use 'reset.scss';
+```
+
+```scss
+@use '_reset.scss';
+```
+
+_파일명일 경우 css 파일로 따로 컴파일하지 않는다는  (그냥 참조용 파일이라는 뜻)

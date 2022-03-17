@@ -323,3 +323,132 @@ var 오브젝트 = JSON.parse(제이슨데이터)
 var 제이슨 = JSON.stringify(오브젝트데이터)
 ```
 
+
+
+##### position : sticky (Edge 이상에서 사용가능)
+
+조건부로 fixed
+
+스크롤이 되어서 이미지가 보이는 순간 지정한 위체에서 fixed됨
+
+top : 100px 라고하면 위에서 100px 위치
+
+부모박스 넘어서면 해제됨
+
+
+
+#### 스크롤 애니메이션
+
+스크롤 현재 높이를 알 수 있는 js 필요
+
+```	js
+document.addEventListener("scroll", function () {
+	var 높이 = document.documentElement.scrollTop;
+	console.log(높이);
+});
+```
+
+스크롤 높이가 650일 때 opacity = 1, 1150일때 opacity=0 이 되도록 가변적인 값 y를 설정해서 1차 방정식으로 구해야됨
+
+"스크롤바높이가 650~1150이 될 때 1~0이 되는 가변적인 값" y = a * 높이 + b
+
+1 = a * 650 + b 
+
+0 = a * 1150 + b
+
+a = -1/500 
+
+b = 115/50
+
+```js
+document.addEventListener("scroll", function () {
+  var 높이 = document.documentElement.scrollTop;
+  console.log(높이);
+  var y = (-1 / 500) * 높이 + 115 / 50;
+  document.querySelector(".card-box").style.opacity = y;
+  console.log(y);
+});
+```
+
+
+
+#### Hammer.js
+
+터치 기능 구현하는데 도움을 주는 라이브러리
+
+설치 : 직접 설치 및 cdn 방식
+
+```js
+var 이미지1 = document.querySelectorAll('.slide-box img')[0];
+    
+var 매니저 = new Hammer.Manager(이미지1);
+매니저.add(new Hammer.Pan({ threshold: 0 }));
+    
+매니저.on('pan', function(e){
+  //이미지1이 pan 되었을 때 실행할 코드 
+})
+```
+
+터치를 구현할 요소를 찾아서 new Hammaer.manager() 함수에 담고, 
+
+내가 사용할 이벤트를 add() 함수로 등록하고 threshold 값 셋 (이벤트 발동 전까지의 역치값)
+
+마지막으로 핵심적인 이벤트리스너를 매니저에 달아줌
+
+e.deltaX : X축 드래그한 거리
+
+드래그한 거리만큼 이미지를 왼쪽으로 이동
+
+```js
+매니저.on('pan', function(e){
+  $('.slide-container').css('transform', 'translateX(' + e.deltaX + ')' );
+})
+```
+
+왼쪽으로만 슬라이딩 하고 싶으면 e.deltaX가 음수일때만
+
+```js
+매니저.on('pan', function(e){
+  if (e.deltaX < -1) {
+    $('.slide-container').css('transform', 'translateX(' + e.deltaX + ')' );
+  }
+})
+```
+
+마우스를 놓으면 이미지2로 변하는 기능
+
+e.isFinal : 터치 끝났는지 알려줌
+
+```js
+매니저.on('pan', function(e){
+    if ( e.deltaX < -1 ){
+      $('.slide-container').css('transform', 'translateX('+ e.deltaX +'px)');
+      //터치가 끝날 때 이미지2로 변하게 해주셈 
+      if (e.isFinal) {
+        $('.slide-container').css('transform', 'translateX(-100vw)');
+      }
+    }
+});
+```
+
+transition 부여하면 드래그하는 속도도 느려짐
+
+이미지2를 보여주기전에 잠깐만 transition 부여해주는 코드로 짜고, 끝나면 제거
+
+```js
+매니저.on('pan', function(e){
+    if ( e.deltaX < -1 ){
+      $('.slide-container').css('transform', 'translateX('+ e.deltaX +'px)');
+      //터치가 끝날 때 이미지2로 변하게 해주셈 
+      if (e.isFinal) {
+        $('.slide-container').addClass('transforming');
+        $('.slide-container').css('transform', 'translateX(-100vw)');
+        //0.5초 후에 코드를 실행하고 싶을 때 쓰는 문법 
+        setTimeout(function(){
+          $('.slide-container').removeClass('transforming');
+        }, 500);
+      }
+    }
+});
+```
+
