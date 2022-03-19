@@ -103,12 +103,48 @@ document.queryselector('input').addEventListener.on('input', function(){
 
 #### 자바스크립트로 html 만들기
 
-append() : html을 하단에 추가하는 메서드
+appendChild(): html을 하단에 추가하는 메서드
 
 ```js
-var 템플릿 = '<p>안녕하세요</p>'
-document.queryselector('div').append(템플릿);
+<div id="test">
+</div>
+
+<script>
+  var a = document.createElement('p'); // html 자료 생성
+  a.innerHTML = '안녕';
+  document.querySelector('#test').appendChild(a);
+</script>
 ```
+
+insertAdjacentHtml() : 문자형 html 넣어주는 함수
+
+```js
+<div id="test">
+</div>
+
+<script>
+  var a = '<p>안녕</p>';
+  document.querySelector('#test').insertAdjacentHTML('beforeend', a);
+// beforebegin : element 앞에
+// afterend : element 뒤에
+// afterbegin : element 안에 가장 첫번째 child
+// beforeend : element 안에 가장 마지막 child
+</script>
+```
+
+안쪽에 추가하는게 아니라 아예 바꾸고 싶으면?
+
+```js
+<div id="test">
+</div>
+
+<script>
+  var a = '<p>안녕</p>';
+  document.querySelector('#test').innerHTML = a
+</script>
+```
+
+
 
 백틱(``) : 백틱 안에서 문자 입력하면 엔터키 가능. ES6
 
@@ -128,7 +164,7 @@ $('#option1').on('change', function(){
 
 
 
-#### forEach 반복문
+#### forEach 반복문 : array 다룰 때
 
 일반적인 for 반복문
 
@@ -154,12 +190,23 @@ var 사이즈 = [26,28,30,32,34,36];
 $('#option1').on('change', function(){
   if ($('#option1').val() == '바지'){
 
-     사이즈.forEach(function(i){
-        var 템플릿 = `<option>${i}</option>`; // 사이즈 개수만큼 반복할 코드, i는 자료에 저장된 하나하나의 데이터
+     사이즈.forEach(function(a, i){
+        var 템플릿 = `<option>${a}</option>`; // 사이즈 개수만큼 반복할 코드, a는 자료에 저장된 하나하나의 데이터, i는 인덱스
         $('#option2').append(템플릿);
      });
  }
 });
+```
+
+#### for in 반복문 : object 다룰 때
+
+```js
+var obj = { name : 'kim', age : 20 }
+
+for (var key in obj){
+  console.log('안녕') // 안녕 2회 출력
+  console.log(key) // name, age 출력
+}
 ```
 
 
@@ -450,5 +497,33 @@ transition 부여하면 드래그하는 속도도 느려짐
       }
     }
 });
+```
+
+
+
+#### Typewriting 애니메이션 만들기
+
+setTimeout 함수 사용 : 코드를 정해진 시간 후에 실행
+
+```js
+ setTimeout(function(){ 실행할 코드 }, 1000) // 1000ms(1초)후에 실행
+```
+
+```js
+var h1태그 = document.querySelector('h1');
+var 원래글씨 = document.querySelector('h1').innerHTML;
+
+$('button').click(function(){
+   애니메이션(h1태그, 원래글씨)
+});
+
+function 애니메이션(h1태그, 원래글씨){
+  h1태그.innerHTML = '';
+  for (let i = 0; i < 원래글씨.length; i++){
+    setTimeout(function(){ 
+      h1태그.innerHTML = h1태그.innerHTML + 원래글씨[i]
+    }, i * 500);
+  }
+}
 ```
 
