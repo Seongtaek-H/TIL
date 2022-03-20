@@ -207,3 +207,169 @@ CSS파일에서 클래스로 컴파일하지 않고싶을 때 쓰는 기호
 ```
 
 _파일명일 경우 css 파일로 따로 컴파일하지 않는다는  (그냥 참조용 파일이라는 뜻)
+
+
+
+##### video 넣는 법 : `<video src="경로">`
+
+```html
+ <video src="경로" controls>  controls 넣어야 재생버튼 생김
+```
+
+##### video 넣는 법2 : `<video><source></video>`
+
+```html
+<video controls>
+	<source src="bridge.mp4" type="video/mp4" />
+</video>
+```
+
+장점 : 호환성을 챙길 수 있음
+
+source를 여러개 넣어서 위에꺼 안되면 밑에꺼 해보세요~ 식으로 코딩할 수 있음
+
+넣을 수 있는 속성
+
+```html
+<video autoplay muted loop poster="썸네일경로" preload="metadata">
+  <source src="비디오파일경로">
+</video>
+```
+
+muted: 음소거상태
+
+autoplay: 자동재생 (muted와 함께 넣어야 동작함)
+
+loop : 무한 반복
+
+poster: 썸네일이미지
+
+preload: 영상을 먼저 다운을 받을지 말지(auto 미리다운, metadata 조금 미리다운, none 미리다운X)
+
+
+
+##### audio 넣는 법 : `<audio src="파일경로">`
+
+controls 넣어줘야 재생할 수 있음
+
+muted : 음소거 상태로 로드
+
+autoplay 속성은 안먹힘
+
+`<source>` 사용 가능
+
+
+
+### transform & @keyframes
+
+##### transform 관련 css 속성
+
+```css
+.box {
+  transform : rotate(10deg); 
+  transform : translate(10px, 20px);
+  transform : scale(2);
+  transform : skew(30deg);
+  
+  /*transform 두개 이상을 한꺼번에 쓰려면*/
+  transform : rotate(10deg) translateX(30px);
+}
+```
+
+rotate는 회전, translate는 좌표이동, scale은 확대축소, skew는 비틀기
+
+애니메이션 줄 경우 그냥 margin 이런걸로 움직이는 것보다 부드러움
+
+transition 은 a -> b 이런 것만 가능하고
+
+복잡한 애니메이션은 **@keyframes**
+
+```css
+@keyframes 와리가리 {
+  0% {
+    transform: translateX(0px);
+  }
+  50% {
+    transform: translateX(-100px);
+  }
+  100% {
+    transform: translateX(100px);
+  }
+}
+```
+
+진행도에 따라 어떤 스타일 넣을지 기입하면 됨. 0% 50% 100% 뿐 아니라 마음대로 쪼개서 쓸 수 있음
+
+@keyframes 넣고 싶으면 animation-name : 이름,  animation-duration : 지속기간
+
+```css
+.ani-text:hover {
+  animation-name: 와리가리;
+  animation-duration: 1s;
+}
+```
+
+애니메이션 세부조정
+
+```css
+.box:hover {
+  animation-name : 움찔움찔;
+  animation-duration : 1s;
+  animation-timing-function : linear; /*베지어 주기*/
+  animation-delay : 1s; /*시작 전 딜레이*/
+  animation-iteration-count : 3; /*몇회 반복할것인가*/
+  animation-play-state : paused;  /*애니메이션을 멈추고 싶은 경우 자바스크립트로 이거 조정*/
+  animation-fill-mode: forwards;  /*애니메이션 끝난 후에 원상복구 하지말고 정지*/
+}
+```
+
+
+
+##### transform 쓰는 이유? 성능이 좋음
+
+transform 변경보다 margin 변경이 더 느림
+
+웹브라우저는 html, css를 그래픽으로 바꿔주는 간단한 프로그램
+
+브라우저가 그림 그리는 순서
+
+1. Render Tree 만들기
+2. Layout 잡기 : width, height, margin, padding 등
+3. Paint 하기 : 픽셀에 색칠함 background-color 같은거
+4. Composite 처리 : transform, opacity 있으면 처리
+
+그럼 width 바꾸면? 2번, 3번, 4번 다시 다해야됨. transform 을 바꾸면 4번만 다시하면 됨
+
+##### 빠른이유2 : transform 이런건 다른 쓰레드에서 처리해줌
+
+웹브라우저는 쓰레드 1개만 씀. 자바스크립트 실행, html, css 처리 전부 한 곳에서 하는데
+
+애니메이션 이런 애들은 다른 쓰레드에서 처리함
+
+
+
+##### 성능 잡는 방법1 : will-change
+
+```css
+.box {
+  will-change: transform;
+} 
+```
+
+바뀔 내용을 미리 렌더링 해주는 속성
+
+너무 남발하면 브라우저 자체가 더 느려질 수도 있음
+
+##### 성능 잡는 방법2 : 3d 애니메이션 사기치기
+
+```css
+.box {
+  transform: translate3d(0, 0, 0);
+}
+```
+
+transform : translate3d 쓰면 3D 이동도 가능한데 GPU를 사용해서 연산
+
+그래서 translate3d(0, 0, 0) 이런 식으로 아무데도 움직이지 않는 3D 이동명령을 주고
+
+뒤에 필요한 transform을 더 적용하면 GPU를 이용해서 .box가 가진 transform 속성들을 연산
