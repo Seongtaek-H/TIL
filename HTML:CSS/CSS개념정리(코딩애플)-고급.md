@@ -373,3 +373,112 @@ transform : translate3d 쓰면 3D 이동도 가능한데 GPU를 사용해서 연
 그래서 translate3d(0, 0, 0) 이런 식으로 아무데도 움직이지 않는 3D 이동명령을 주고
 
 뒤에 필요한 transform을 더 적용하면 GPU를 이용해서 .box가 가진 transform 속성들을 연산
+
+
+
+### grid 레이아웃 (IE 지원X, Edge 이상)
+
+```html
+<div class="grid-container">
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+</div>
+```
+
+```css
+.grid-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 100px 100px 100px;
+  grid-gap: 10px;
+}
+```
+
+부모 <div>에 display : grid를 주면 자식 <div>들은 전부 격자처럼 진열
+
+grid-template-columns : 격자의 열 너비와 갯수
+
+grid-template-rows : 격자의 행 높이와 갯수 설정
+
+fr : 몇배만큼 차지할지를 나타내는 값
+
+grid-gap : 격자 간격
+
+
+
+그리드 레이아웃 만들려면
+
+1. 내부 박스 크기 조절 (grid-column, grid-row 주기)
+2. 부모 조작
+
+
+
+##### Grid로 레이아웃 만드는 법 1. 자식 div 높이와 폭을 조정하기
+
+```html
+<div class="grid-container">
+    <div class="grid-nav">헤더</div>
+    <div class="grid-sidebar">사이드바</div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+</div>
+```
+
+```css
+.grid-nav {
+  grid-column : 1 / 4; /* 세로선 1~4까지 차지 */
+  grid-row : 2 / 4;		 /* 가로선 2~4까지 차지 */
+}
+```
+
+
+
+##### Grid로 레이아웃 만드는 법 2. 자식에게 이름쓰고 부모가 배치하기
+
+```html
+<div class="grid-container">
+    <div class="grid-nav">헤더</div>
+    <div class="grid-sidebar">사이드바</div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+</div>
+```
+
+```css
+.grid-nav {
+  grid-area: 헤더;
+}
+
+.grid-sidebar {
+  grid-area: 사이드;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 100px 100px 100px;
+  grid-gap: 10px;
+  grid-template-areas: 
+    "헤더 헤더 헤더 헤더"
+    "사이드 사이드 . ."
+    "사이드 사이드 . ."
+}
+```
+
