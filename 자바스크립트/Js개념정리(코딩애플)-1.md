@@ -84,7 +84,7 @@ document.getElementById('close').addEventListener('click', function(){
 
 * querySelectorAll() : 해당하는거 다 찾아주셈. 배열로 리턴. document.querySelectorAll('.test1')[1] 이런 식으로 쓸 수 있음.
 
-	
+​	
 
 #### 클래스 탈부착
 
@@ -249,7 +249,7 @@ if (조건식1) {
 
 (참고) 0, "", null, undefined, NaN 얘네도 조건식에서는 false로 판단함
 
-* 조건식에서 여러 조건을 확인하고 싶으면 &&, || 사용
+* 조건식에서 여러 조건을 확인하고 싶으면 &&, || 사용``
 * if문은 위에서부터 읽어내려가다가 조건이 참인 하나만 실행하고, 그 뒤의 if/else는 해석안함
 
 
