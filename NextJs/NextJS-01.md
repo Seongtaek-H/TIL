@@ -52,7 +52,7 @@ next.js 는 앱에 있는 페이지들이 미리 렌더링 되는데, 이것들�
 
 create react app 은 client-side render 를 하는 앱을 만듬
 
-클라이언트 사이드 렌더링 : 
+##### 클라이언트 사이드 렌더링
 
 client-side의 자바스크립트가 모든 UI를 만드는 것을 의미.
 
@@ -237,7 +237,7 @@ export default function MyApp({ Component, pageProps }) { // 컴포넌트와 프
 
 ### Patterns
 
-##### Layout 패턴 : custiom app component를 사용할 때 쓰는거
+##### Layout 패턴 : custom app component를 사용할 때 쓰는거
 
 먼저 Layout.js 라는 component를 만들고, export default function
 
